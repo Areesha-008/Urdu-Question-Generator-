@@ -1,0 +1,13 @@
+# Urdu text data: always treat as UTF-8 text, never CRLF-convert (offsets matter).
+*.tsv text eol=lf
+*.txt text eol=lf
+*.md  text eol=lf
+*.py  text eol=lf
+
+# Notebooks are JSON; keep LF and mark so GitHub renders diffs sanely.
+*.ipynb text eol=lf linguist-language=Jupyter
+
+# Binary model artifacts.
+*.model binary
+*.pt    binary
+*.bin   binary

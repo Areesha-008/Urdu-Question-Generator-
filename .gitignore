@@ -1,0 +1,46 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.python-version
+
+# ---- Jupyter ----
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# ---- Generated tokenizer inputs ----
+# Corpus inputs are regenerated from data/train.tsv by notebooks/tokenizer.ipynb.
+# The trained tokenizer itself (artifacts/tokenizer/ur_sp.model / .vocab) IS committed:
+# retraining SentencePiece reshuffles token IDs and silently invalidates checkpoints.
+corpus.txt
+sp_corpus.txt
+notebooks/corpus.txt
+notebooks/sp_corpus.txt
+
+# ---- Training artifacts ----
+checkpoints/
+outputs/
+runs/
+logs/
+wandb/
+artifacts/checkpoints/
+artifacts/experiments/
+*.pt
+*.bin
+*.safetensors
+*.ckpt
+
+# ---- Caches ----
+.cache/
+hf_cache/
+~/.cache/huggingface/
+
+# ---- OS / editor ----
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
