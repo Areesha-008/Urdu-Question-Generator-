@@ -44,3 +44,9 @@ Thumbs.db
 .idea/
 .vscode/
 *.swp
+
+# ---- Local collaboration notes ----
+/CONTRIBUTING.md
+
+# ---- Local project documentation ----
+/docs/

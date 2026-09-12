@@ -19,13 +19,10 @@ Target:  بیونس نے کب مقبولیت حاصل کرنا شروع کی؟
 
 | Phase | Scope | State |
 | :-- | :-- | :-- |
-| 1 | Data preparation & exploration | Done — [`notebooks/data_prep.ipynb`](notebooks/data_prep.ipynb), [`docs/phase1_data_prep.md`](docs/phase1_data_prep.md) |
-| 2 | SentencePiece tokenizer | Notebook written — [`notebooks/tokenizer.ipynb`](notebooks/tokenizer.ipynb); artifacts not yet committed |
-| 3 | Seq2seq training | Data-loading scaffold written — [`notebooks/training.ipynb`](notebooks/training.ipynb); training loop not yet implemented |
-| 4 | Evaluation | Not started |
-
-See [`docs/repo_audit.md`](docs/repo_audit.md) for the current audit of the
-pipeline and the open issues to resolve before Phase 3.
+| 1 | Data preparation & exploration | Done — [`notebooks/data_prep.ipynb`](notebooks/data_prep.ipynb) |
+| 2 | SentencePiece tokenizer | Implemented — [`notebooks/tokenizer.ipynb`](notebooks/tokenizer.ipynb) |
+| 3 | GRU/Luong model | Implemented — [`notebooks/model.ipynb`](notebooks/model.ipynb); retraining required after the latest improvements |
+| 4 | Evaluation | Implemented — [`notebooks/evaluation.ipynb`](notebooks/evaluation.ipynb) |
 
 ## Setup
 
@@ -43,8 +40,8 @@ re-run to train a model:
 
 | File | Pairs | Purpose |
 | :-- | --: | :-- |
-| `data/train.tsv` | 75,067 | Training |
-| `data/valid.tsv` | 10,018 | Checkpoint selection |
+| `data/train.tsv` | 75,000 | Training |
+| `data/valid.tsv` | 8,249 | Checkpoint selection |
 | `data/wiki_test.tsv` | 177 | Out-of-domain test (Urdu Wikipedia) |
 
 Format: two tab-separated columns, no header, `source<TAB>target`, written with
@@ -79,7 +76,6 @@ leakage, and exits non-zero on a hard failure.
 
 ```
 data/            Committed TSV splits (source<TAB>target)
-docs/            Project notes, phase write-ups, and the repository audit
 notebooks/       Exploratory and phase notebooks
 scripts/         Maintenance and validation scripts
 requirements.txt Pinned-by-lower-bound dependencies
@@ -87,11 +83,9 @@ requirements.txt Pinned-by-lower-bound dependencies
 
 ## Conventions
 
-- **Tokenizer artifacts are committed, `corpus.txt` is not.** Retraining
-  SentencePiece reshuffles token IDs and silently invalidates any checkpoint
-  trained against the old vocabulary, so `artifacts/tokenizer/ur_sp.model` and
-  `.vocab` are
-  version-controlled; the 25 MB corpus they are trained from is regenerated.
+- **Keep each tokenizer with its checkpoint.** Retraining SentencePiece reshuffles
+  token IDs and silently invalidates old checkpoints. The tokenizer and model
+  artifacts are saved together on Google Drive; the generated corpus is ignored.
 - **Clear notebook outputs before committing** unless a plot is the point of the
   commit — output blobs make notebook diffs unreviewable.
 - **Do not evaluate Urdu with `rouge-score`'s default tokenizer.** It strips every
