@@ -12,5 +12,3 @@ data/generated/
 *.pt
 *.ckpt
 .env
-results/demo/raw/
-results/demo/frames/
