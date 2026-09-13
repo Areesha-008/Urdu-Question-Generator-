@@ -22,21 +22,17 @@ SIZE = {'width': 1920, 'height': 1080}
 
 DEMO_CSS = """
 html, body { overflow: hidden; }
-main { max-width: 1500px; padding: 28px 72px 110px; }
+main { max-width: 1500px; padding: 28px 72px 118px; }
 header { padding: 28px 0 20px; max-width: 820px; }
 h1 { font-size: 46px; margin: 12px 0 14px; }
 textarea { height: 118px; }
 article { min-height: 150px; }
 footer { display: none; }
 #demo-caption {
-  position: fixed; left: 72px; right: 72px; bottom: 28px;
-  text-align: center; font-size: 22px; line-height: 1.4;
-  letter-spacing: 0.01em; color: #344e6c; z-index: 20;
-}
-#demo-mouse {
-  position: fixed; width: 18px; height: 18px; border-radius: 50%;
-  border: 2px solid #101828; background: #c7a463;
-  transform: translate(-50%, -50%); pointer-events: none; z-index: 30;
+  position: fixed; left: 80px; right: 80px; bottom: 32px;
+  text-align: center; z-index: 20;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 28px; line-height: 1.35; color: #101828;
 }
 """
 
@@ -58,21 +54,6 @@ async def caption(page: Page, text: str) -> None:
 
 async def prepare_app(page: Page) -> None:
     await page.add_style_tag(content=DEMO_CSS)
-    await page.evaluate(
-        """css => {
-          const style = document.createElement('style');
-          style.textContent = css;
-          document.head.appendChild(style);
-          const mouse = document.createElement('div');
-          mouse.id = 'demo-mouse';
-          document.body.appendChild(mouse);
-          document.addEventListener('mousemove', event => {
-            mouse.style.left = event.clientX + 'px';
-            mouse.style.top = event.clientY + 'px';
-          });
-        }""",
-        DEMO_CSS,
-    )
     await page.wait_for_function(
         "document.getElementById('health')?.textContent === 'Model ready'",
         timeout=15000,
@@ -81,7 +62,7 @@ async def prepare_app(page: Page) -> None:
 
 async def delay_generate(route: Route) -> None:
     response = await route.fetch()
-    await asyncio.sleep(1.15)
+    await asyncio.sleep(1.7)
     await route.fulfill(response=response)
 
 
@@ -151,33 +132,34 @@ async def record() -> Path:
         await page.route('**/generate', delay_generate)
 
         await page.goto(title)
-        await hold(page, 4.6)
+        await hold(page, 5.2)
 
         await page.goto(APP, wait_until='networkidle')
         await prepare_app(page)
-        await caption(page, 'A live model. A sentence in. A question out.')
-        await hold(page, 2.4)
+        await caption(page, 'The trained model is live in the browser.')
+        await hold(page, 2.6)
 
-        await caption(page, 'Write an Urdu sentence, then mark the answer to ask about.')
-        await type_field(page, '#sentence', 'پاکستان کا دارالحکومت اسلام آباد ہے۔', 42)
-        await hold(page, 0.6)
-        await type_field(page, '#answer', 'اسلام آباد', 55)
-        await hold(page, 0.8)
+        await caption(page, 'Type a sentence, then mark the answer to ask about.')
+        await type_field(page, '#sentence', 'پاکستان کا دارالحکومت اسلام آباد ہے۔', 48)
+        await hold(page, 0.7)
+        await type_field(page, '#answer', 'اسلام آباد', 70)
+        await page.locator('h1').click()
+        await hold(page, 1.0)
 
-        await caption(page, 'Generate with greedy decoding and beam search.')
+        await caption(page, 'Generate a question with greedy search and beam search.')
         await generate(page)
         await caption(page, 'Both decoders ask: what is the capital of Pakistan?')
-        await hold(page, 4.2)
+        await hold(page, 5.4)
 
-        await caption(page, 'Same model. Now a how-many question.')
+        await caption(page, 'Same model. Now ask about a quantity.')
         await page.click('button[data-example="2"]')
-        await hold(page, 1.6)
+        await hold(page, 2.0)
         await generate(page)
-        await caption(page, 'Beam search repairs the agreement: کتنی, not کتنے.')
-        await hold(page, 4.6)
+        await caption(page, 'Beam search tightens the wording: how many books?')
+        await hold(page, 5.6)
 
         await page.goto(end)
-        await hold(page, 5.4)
+        await hold(page, 6.0)
 
         video = page.video
         await context.close()

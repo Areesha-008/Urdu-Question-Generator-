@@ -1,0 +1,23 @@
+I taught a neural network to ask questions in Urdu.
+
+No pretrained weights. No English pivot. 14.6 million parameters, trained from scratch.
+
+You give it a sentence and mark the answer. It writes the question.
+
+Architecture
+• SentencePiece tokenizer (8k Urdu subwords)
+• 2-layer bidirectional GRU encoder, with answer membership and distance features
+• Luong attention + a pooled answer representation
+• GRU decoder with input feeding
+• Greedy decoding and beam search (k=3)
+
+Results
+• UQA validation, beam BLEU-4: 11.29
+• Wiki-UQA, beam BLEU-4: 9.23
+• Trained in 53 minutes on a single NVIDIA T4
+
+The clip is a live run of the local app — same checkpoint, same UI.
+
+Write-up: https://medium.com/@musarashid9271/teaching-a-neural-network-to-ask-questions-in-urdu-2b142b39818b
+
+#NLP #Urdu #MachineLearning #Seq2Seq #LowResourceNLP #DeepLearning
