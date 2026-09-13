@@ -5,7 +5,7 @@
 
 An answer-conditioned encoder-decoder that generates an Urdu question from a sentence and a marked answer. The model is a two-layer bidirectional GRU encoder and GRU decoder with Luong attention, trained from scratch without pretrained models or weights.
 
-[Read the project blog](https://medium.com/@musarashid9271/teaching-a-neural-network-to-ask-questions-in-urdu-2b142b39818b?postPublishedType=repub) · LinkedIn post: [_View Linkedin Post_](https://www.linkedin.com/posts/muhammad-musa-a97527435_i-along-with-my-teammate-areesha-saqib-built-activity-7504762904299339776-DB77?utm_source=share&utm_medium=member_desktop&rcm=ACoAAG3j41MBsYib5938h681YeTb8DQ3ynZVQTc)
+[Read the project blog](https://medium.com/@musarashid9271/teaching-a-neural-network-to-ask-questions-in-urdu-2b142b39818b?postPublishedType=repub) · LinkedIn post: [_Read Linkedin Post_](https://www.linkedin.com/posts/muhammad-musa-a97527435_i-along-with-my-teammate-areesha-saqib-built-activity-7504762904299339776-DB77?utm_source=share&utm_medium=member_desktop&rcm=ACoAAG3j41MBsYib5938h681YeTb8DQ3ynZVQTc)
 
 ## Results
 
