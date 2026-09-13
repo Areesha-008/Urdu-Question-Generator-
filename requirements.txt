@@ -1,32 +1,11 @@
-# Urdu Question Generator — runtime dependencies
-# Python >= 3.9. Install with:  pip install -r requirements.txt
-# Lower bounds only; run `pip freeze > requirements.lock.txt` once training starts
-# so results stay reproducible.
-
-# --- Data pipeline (Phase 1: notebooks/data_prep.ipynb) ---
-datasets>=2.14,<4
-numpy>=1.24
-matplotlib>=3.7
-
-# --- Tokenizer (Phase 2: notebooks/tokenizer.ipynb) ---
-sentencepiece>=0.1.99
-
-# --- Modelling (Phase 3) ---
-torch>=2.0
-transformers>=4.35
-accelerate>=0.25
-
-# --- Evaluation (Phase 4) ---
-# sacrebleu handles Urdu correctly (verified: BLEU/chrF give sensible scores).
-sacrebleu>=2.4
-# WARNING: rouge-score's default tokenizer strips every non-[a-z0-9] character,
-# so it scores 0.0 on Urdu even when hypothesis == reference. Only use it with a
-# custom Urdu tokenizer — see docs/repo_audit.md, finding E1.
-rouge-score>=0.1.2
-
-# --- Demo and human evaluation ---
-gradio>=5.0
-scikit-learn>=1.3
-
-# Progress reporting used by the current upstream notebooks.
-tqdm>=4.65.0
+datasets>=2.14,<5
+fastapi>=0.115,<1
+matplotlib>=3.7,<4
+numpy>=1.24,<3
+rouge-score>=0.1.2,<0.2
+sacrebleu>=2.4,<3
+scikit-learn>=1.3,<2
+sentencepiece>=0.2,<0.3
+torch>=2.6,<3
+tqdm>=4.65,<5
+uvicorn>=0.30,<1

@@ -1,0 +1,11 @@
+id	quality	failure_type
+2	good	
+5	good	
+9	good	
+11	good	
+36	good	
+0	bad	awkward syntax and incomplete question focus
+4	bad	wrong question type and hallucinated year
+19	bad	wrong entity and unsupported location
+46	bad	wrong entity and copied context fragment
+48	bad	wrong question type and answer mismatch

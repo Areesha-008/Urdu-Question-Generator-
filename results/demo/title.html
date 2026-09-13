@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Title</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #fff; overflow: hidden; }
+  body {
+    font-family: ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+    color: #101828;
+    display: grid;
+    place-items: center;
+  }
+  .card { width: min(1040px, 86vw); text-align: left; animation: rise 1.1s ease both; }
+  .brand {
+    font-family: "Noto Nastaliq Urdu", "Geeza Pro", serif;
+    font-size: 56px;
+    line-height: 1.4;
+    color: #101828;
+  }
+  .studio {
+    display: block;
+    margin-top: 6px;
+    font-size: 13px;
+    letter-spacing: 0.28em;
+    color: #344e6c;
+    font-family: ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+  }
+  h1 {
+    font-family: Georgia, serif;
+    font-weight: 400;
+    font-size: 78px;
+    line-height: 1.05;
+    margin: 42px 0 28px;
+  }
+  p {
+    max-width: 760px;
+    font-size: 24px;
+    line-height: 1.55;
+    color: #536274;
+    margin: 0;
+  }
+  .meta {
+    margin-top: 48px;
+    font-size: 15px;
+    letter-spacing: 0.06em;
+    color: #344e6c;
+  }
+  .rule { width: 72px; height: 3px; background: #c7a463; margin: 28px 0; }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: none; }
+  }
+</style>
+<body>
+  <div class="card">
+    <div class="brand">سوال <span class="studio">QUESTION STUDIO</span></div>
+    <div class="rule"></div>
+    <h1>A sentence in.<br>A question out.</h1>
+    <p>Watch a from-scratch Urdu encoder-decoder turn a marked answer into a practice question.</p>
+    <div class="meta">14.6M parameters · BiGRU + Luong attention · no pretrained weights</div>
+  </div>
+</body>
+</html>

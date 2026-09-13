@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Urdu Question Studio</title>
+<link rel="stylesheet" href="/static/style.css?v=2">
+<main>
+<nav><span class="brand">سوال <small>QUESTION STUDIO</small></span><span id="health" role="status">Connecting…</span></nav>
+<header><p class="eyebrow">FROM A SENTENCE TO A QUESTION</p><h1>A little curiosity.<br>A new way to learn.</h1><p>Write an Urdu sentence, choose its answer, and turn it into a practice question.</p></header>
+<div class="layout"><form id="form"><label for="sentence">Your sentence <span>اردو جملہ</span></label><textarea id="sentence" dir="rtl" lang="ur" required maxlength="2000" placeholder="پاکستان کا دارالحکومت اسلام آباد ہے۔"></textarea>
+<div class="examples"><button type="button" data-example="0">A place</button><button type="button" data-example="1">A person</button><button type="button" data-example="2">A quantity</button></div>
+<label for="answer">Answer to ask about <span>جواب</span></label><input id="answer" dir="rtl" lang="ur" required maxlength="500" placeholder="اسلام آباد">
+<button class="primary" id="submit">Generate questions <span>↗</span></button><p id="message" role="status" aria-live="polite"></p></form>
+<section aria-label="Generated questions"><article><p class="eyebrow">GREEDY · DIRECT CHOICE</p><p id="greedy" class="question" dir="rtl" lang="ur">آپ کا سوال یہاں آئے گا۔</p></article><article><p class="eyebrow">BEAM SEARCH · ALTERNATIVE CHOICE</p><p id="beam" class="question" dir="rtl" lang="ur">ایک اور انداز، ایک نیا سوال۔</p></article><p class="note">Check that the selected answer responds to the question. This is an experimental model trained from scratch.</p></section></div>
+<footer>Built for Urdu. Made for practice.</footer></main><script src="/static/app.js?v=2"></script>
+</html>
