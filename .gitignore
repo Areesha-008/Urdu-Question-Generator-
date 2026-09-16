@@ -12,3 +12,4 @@ data/generated/
 *.pt
 *.ckpt
 .env
+results/demo/
