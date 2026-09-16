@@ -22,23 +22,27 @@ from config import PREPARED_DIR, RUN_DIR, ModelConfig
 from scripts.prepare_data import read_pairs
 
 
-class QGDataset(Dataset):
-    def __init__(self, path, tokenizer):
-        self.pairs = read_pairs(path)
-        self.items = [(torch.tensor(tokenizer.encode(source)),
+TensorPair = tuple[torch.Tensor, torch.Tensor]
+
+
+class QGDataset(Dataset[TensorPair]):
+    def __init__(self, path: Path, tokenizer: Tokenizer):
+        self.pairs: list[tuple[str, str]] = read_pairs(path)
+        self.items: list[TensorPair] = [(torch.tensor(tokenizer.encode(source)),
             torch.tensor([2] + tokenizer.encode(target) + [3])) for source, target in self.pairs]
 
-    def __len__(self):
+    def __len__(self) -> int:
         return len(self.items)
 
-    def __getitem__(self, index):
+    def __getitem__(self, index: int) -> TensorPair:
         return self.items[index]
 
 
-def collate(batch):
+def collate(batch: list[TensorPair]) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
     sources, targets = zip(*batch)
-    return pad_sequence(sources, batch_first=True), torch.tensor([len(source) for source in sources]), \
-        pad_sequence(targets, batch_first=True)
+    return (pad_sequence(list(sources), batch_first=True),
+            torch.tensor([len(source) for source in sources]),
+            pad_sequence(list(targets), batch_first=True))
 
 
 def run_epoch(model, loader, device, optimizer=None):
