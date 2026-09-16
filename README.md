@@ -1,5 +1,4 @@
-
-![Uploading frontend.png…]()
+![Urdu Question Generator interface](results/figures/frontend.png)
 
 # Urdu Question Generator
 

@@ -22,7 +22,11 @@ class Generator:
         self.model.eval()
 
     @torch.inference_mode()
-    def generate(self, source, beam_size=1, max_length=60, length_penalty=0.6, trace=False):
+    def generate(self, source, beam_size=1, max_length=None, length_penalty=None, trace=False):
+        decoding = self.metadata.get('decoding', {})
+        max_length = max_length if max_length is not None else decoding.get('max_length', 60)
+        length_penalty = (length_penalty if length_penalty is not None
+                          else decoding.get('length_penalty', 0.6))
         ids = self.tokenizer.encode(validate_source(source))
         if len(ids) > 256:
             raise ValueError('Use a sentence with at most 256 subwords.')
